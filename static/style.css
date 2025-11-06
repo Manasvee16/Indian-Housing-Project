@@ -1,0 +1,229 @@
+/* --- Import Google Font (Rubik) --- */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300,400,500,600,700&display=swap');
+
+/* --- Define a new, dark, sophisticated color palette --- */
+:root {
+  --bg-primary: #121212;         /* Very dark background */
+  --bg-secondary: #1e1e1e;       /* Slightly lighter dark for cards */
+  --text-light: #e0e0e0;         /* Light text for readability */
+  --text-muted: #a0a0a0;         /* Muted text for secondary info */
+  --accent-blue: #00bcd4;        /* Cyan-blue for vibrant accents */
+  --accent-blue-dark: #0097a7;   /* Darker cyan for hover */
+  --accent-gradient-start: #00bcd4; /* For button gradient */
+  --accent-gradient-end: #00e676;   /* Green for button gradient */
+  --border-dark: #333333;        /* Darker border for separation */
+  --border-focus: #00bcd4;       /* Accent color for focus */
+  --shadow-dark: rgba(0, 0, 0, 0.4);  /* Deeper shadow for dark theme */
+  --shadow-light: rgba(0, 0, 0, 0.2); /* Lighter shadow for elements */
+  --success-color: #4CAF50;      /* Green for success */
+  --success-bg: rgba(76, 175, 80, 0.15); /* Transparent green background */
+}
+
+/* --- Global Styles --- */
+body {
+  font-family: 'Rubik', sans-serif;
+  background-color: var(--bg-primary); /* Deep dark background */
+  color: var(--text-light);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* --- Page Title --- */
+h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 40px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 15px rgba(0, 188, 212, 0.2); /* Subtle glow on title */
+}
+
+/* --- Result Message Style --- */
+h2.result {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--success-color);
+  background-color: var(--success-bg);
+  border: 1px solid var(--success-color);
+  padding: 20px 25px;
+  border-radius: 12px;
+  max-width: 650px;
+  margin: 30px auto;
+  box-shadow: 0 8px 20px var(--shadow-dark);
+}
+
+/* --- Form Container (Dark Card) --- */
+form {
+  width: 90%;
+  max-width: 650px;
+  background-color: var(--bg-secondary); /* Lighter dark for the card */
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px var(--shadow-dark); /* Deeper shadow for dark theme */
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle light border */
+}
+
+form:hover {
+    box-shadow: 0 15px 40px var(--shadow-dark);
+    transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+/* --- Form Group for spacing --- */
+.form-group {
+    margin-bottom: 30px;
+}
+
+/* --- Input Container (for floating label effect) --- */
+.input-container {
+    position: relative;
+    padding-top: 20px;
+}
+
+/* --- Input Fields --- */
+input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    background-color: #2a2a2a; /* Slightly lighter dark input background */
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: var(--text-muted); /* Muted placeholder text */
+}
+
+/* --- Floating Label (with Fancy Gradient) --- */
+.input-container label {
+    position: absolute;
+    top: 35px;
+    left: 15px;
+    font-size: 1rem;
+    
+    /* --- NEW GRADIENT FONT --- */
+    color: var(--accent-gradient-start); /* Fallback for older browsers */
+    background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    /* --- End new properties --- */
+    
+    pointer-events: none;
+    transition: all 0.2s ease;
+    background-color: var(--bg-secondary); /* Matches form background */
+    padding: 0 5px;
+    margin-left: -5px;
+}
+
+/* --- Label moves up and changes color when input is focused or has content --- */
+/* Note: It changes to a solid color on focus for better UX */
+input[type="text"]:focus + label,
+input[type="text"]:not(:placeholder-shown) + label {
+    top: 0;
+    left: 10px;
+    font-size: 0.85rem;
+    color: var(--accent-blue); /* Accent color for focused label */
+    font-weight: 500;
+    
+    /* --- Revert gradient for solid color on focus --- */
+    background: none;
+    -webkit-text-fill-color: var(--accent-blue);
+    -moz-text-fill-color: var(--accent-blue);
+}
+
+/* --- Focus State for Input --- */
+input[type="text"]:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3); /* Accent glow */
+    background-color: #3a3a3a; /* Slightly lighter on focus */
+}
+
+
+/* --- Submit Button (Gradient) --- */
+input[type="submit"] {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end)); /* Vibrant gradient */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 10px 25px rgba(0, 188, 212, 0.4); /* Shadow matching gradient start color */
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  outline: none;
+}
+
+input[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--accent-blue-dark), #00c853); /* Slightly darker, more intense gradient */
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(0, 188, 212, 0.6);
+}
+
+input[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 15px var(--shadow-dark);
+}
+
+input[type="submit"]:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+    justify-content: flex-start;
+  }
+
+  form {
+    padding: 30px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+  }
+  
+  h2.result {
+    font-size: 1.3rem;
+    padding: 15px 20px;
+  }
+
+  input[type="submit"] {
+    font-size: 1.1rem;
+    padding: 14px;
+  }
+
+  .form-group {
+      margin-bottom: 20px;
+  }
+}

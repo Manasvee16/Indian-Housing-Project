@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian House Price Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <h1>Indian House Price Prediction System</h1>
+
+    <form action="{{ url_for('predict_datapoints') }}" method="POST">
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="lcr" name="lcr" placeholder=" " required />
+                <label for="lcr">Local Crime Rate (lcr)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="lpz" name="lpz" placeholder=" " required />
+                <label for="lpz">Large Plot Zoning (lpz)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="ia" name="ia" placeholder=" " required />
+                <label for="ia">Industrial Area (ia)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="wp" name="wp" placeholder=" " required />
+                <label for="wp">Waterfront Property (wp)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="pl" name="pl" placeholder=" " required />
+                <label for="pl">Pollution Level (pl)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="rph" name="rph" placeholder=" " required />
+                <label for="rph">Average Rooms per House (rph)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="age" name="age" placeholder=" " required />
+                <label for="age">Property Age (age)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="dis" name="dis" placeholder=" " required />
+                <label for="dis">Distance to Employment Hubs (dis)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="ha" name="ha" placeholder=" " required />
+                <label for="ha">Highway Accessibility (ha)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="tax" name="tax" placeholder=" " required />
+                <label for="tax">Property Tax Rate (tax)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="ptratio" name="ptratio" placeholder=" " required />
+                <label for="ptratio">School Pupil-Teacher Ratio (ptratio)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="ld" name="ld" placeholder=" " required />
+                <label for="ld">Local Demographics (ld)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="lip" name="lip" placeholder=" " required />
+                <label for="lip">Lower Income Population (lip)</label>
+            </div>
+        </div>
+        
+        <input type="submit" value="Predict Price" />
+
+    </form>
+    
+    {% if results %}
+      <h2 class="result">The Predicted House Price is: ₹ {{ results }}</h2>
+    {% endif %}
+
+</body>
+</html>
