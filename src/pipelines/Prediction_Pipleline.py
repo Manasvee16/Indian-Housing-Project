@@ -65,19 +65,19 @@ class CustomData:
         try:
             custom_data_input_dict = {
                 # Original Model Column : [New Form Variable]
-                "crim": [self.lcr],
-                "zn": [self.lpz],
-                "indus": [self.ia],
-                "chas": [self.wp],
-                "nox": [self.pl],
-                "rm": [self.rph],
+                "lcr": [self.lcr],
+                "lpz": [self.lpz],
+                "ia": [self.ia],
+                "wp": [self.wp],
+                "pl": [self.pl],
+                "rph": [self.rph],
                 "age": [self.age],
                 "dis": [self.dis],
-                "rad": [self.ha],
+                "ha": [self.ha],
                 "tax": [self.tax],
                 "ptratio": [self.ptratio],
-                "b": [self.ld],       # Map ld back to 'b'
-                "lstat": [self.lip]  # Map lip back to 'lstat'
+                "ld": [self.ld],       # Map ld back to 'b'
+                "lip": [self.lip]  # Map lip back to 'lstat'
             }
             
             df = pd.DataFrame(custom_data_input_dict)

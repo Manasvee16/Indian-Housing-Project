@@ -28,7 +28,7 @@ class DataTransformation:
     def get_data_tranformation(sel, train_df : pd.DataFrame) -> ColumnTransformer:
         logging.info("Creating preprocessor object")
 
-        numerical_columns = ['crim', 'zn', 'indus', 'chas', 'nox', 'rm', 'age', 'dis', 'rad', 'tax', 'ptratio', 'b', 'lstat']
+        numerical_columns = ['lcr', 'lpz', 'ia', 'pl', 'rph', 'age', 'dis', 'ha', 'tax', 'ptratio', 'ld', 'lip']
 
         num_pipeline= Pipeline(
                 steps=[
