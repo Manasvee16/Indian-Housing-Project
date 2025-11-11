@@ -1,11 +1,11 @@
 {
+  "version": 2,
+  "buildCommand": "pip install -r requirements.txt",
   "builds": [
-    { "src": "app.py", "use": "@vercel/python" }
+    { "src": "app.py", "use": "@vercel/python@3.1.0" }
   ],
-  "functions": {
-    "app.py": {
-      "runtime": "python3.9"
-    }
+  "env": {
+    "PYTHON_VERSION": "3.10"
   },
   "routes": [
     { "src": "/(.*)", "dest": "app.py" }

@@ -1,4 +1,4 @@
-from flask import Flask, request, app, jsonify, render_template
+from flask import Flask, request, jsonify, render_template
 from src.pipelines.Prediction_Pipleline import CustomData, PredictPipeline
 
 app = Flask(__name__)
