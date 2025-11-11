@@ -39,7 +39,20 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
 def load_object(file_path):
     try:
         with open(file_path, 'rb') as file_obj:
-            return pickle.load(file_obj)
+            try:
+                return pickle.load(file_obj)
+            except ModuleNotFoundError as e:
+                # Provide a clearer error message when a package required by the
+                # pickled object (for example, CatBoost) is missing in the
+                # deployment environment. Raise a CustomException so callers
+                # can handle it and avoid crashing the process.
+                logging.error("Module required by pickle not found: %s", e)
+                raise CustomException(
+                    f"Missing dependency while loading object: {e}.\n"
+                    "This usually means the model was trained with a library (e.g. CatBoost) "
+                    "that is not installed in the runtime. Install the missing package "
+                    "or re-export the model in a compatible format.", sys
+                )
     except Exception as e:
         logging.error("Exception occured in load_object function utils")
         raise CustomException(e, sys)
