@@ -1,6 +1,6 @@
 import os
 import sys
-import pandas as pd
+import numpy as np
 from src.logger import logging
 from src.exception import CustomException
 # Make sure your utils.py file is in src/utils/ and has a load_object function
@@ -59,29 +59,28 @@ class CustomData:
 
     def get_data_as_dataframe(self):
         """
-        This function maps the new form names (lcr, lpz) back to the 
-        original model column names (crim, zn) so the preprocessor can work.
+        This function creates a 2D numpy array instead of pandas DataFrame
+        to reduce dependencies and memory footprint.
         """
         try:
-            custom_data_input_dict = {
-                # Original Model Column : [New Form Variable]
-                "lcr": [self.lcr],
-                "lpz": [self.lpz],
-                "ia": [self.ia],
-                "wp": [self.wp],
-                "pl": [self.pl],
-                "rph": [self.rph],
-                "age": [self.age],
-                "dis": [self.dis],
-                "ha": [self.ha],
-                "tax": [self.tax],
-                "ptratio": [self.ptratio],
-                "ld": [self.ld],       # Map ld back to 'b'
-                "lip": [self.lip]  # Map lip back to 'lstat'
-            }
+            # Create numpy array with shape (1, 13) for single prediction
+            data_array = np.array([[
+                self.lcr,
+                self.lpz,
+                self.ia,
+                self.wp,
+                self.pl,
+                self.rph,
+                self.age,
+                self.dis,
+                self.ha,
+                self.tax,
+                self.ptratio,
+                self.ld,
+                self.lip
+            ]], dtype=np.float64)
             
-            df = pd.DataFrame(custom_data_input_dict)
-            return df
+            return data_array
             
         except Exception as e:
             raise CustomException(e,sys)
