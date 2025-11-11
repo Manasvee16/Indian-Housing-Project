@@ -1,5 +1,5 @@
 #!/bin/bash
-# Vercel build script - aggressive size optimization for serverless
+# Vercel build script - optimized for serverless function size
 set -e
 
 echo "Python version:"
@@ -9,24 +9,19 @@ echo "Pip version:"
 pip --version
 
 echo "Installing Python dependencies..."
+# Use pre-built wheels only, no source builds
 pip install --upgrade pip setuptools wheel
+pip install --no-cache-dir --only-binary :all: -r requirements.txt || \
+pip install --no-cache-dir -r requirements.txt
 
-# Install with maximum size optimization
-pip install --no-cache-dir --no-binary :all: -r requirements.txt 2>/dev/null || pip install --no-cache-dir -r requirements.txt
+echo "Cleaning up unnecessary files..."
+# Remove compiled bytecode
+find /usr/local/lib -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+find /usr/local/lib -type f -name "*.pyc" -delete 2>/dev/null || true
 
-echo "Cleaning up unnecessary files to reduce size..."
-# Remove compiled bytecode and caches
-find /usr/local/lib -name "*.pyc" -delete 2>/dev/null || true
-find /usr/local/lib -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
-find /usr/local/lib -name "*.egg-info" -type d -exec rm -rf {} + 2>/dev/null || true
-
-# Remove tests and documentation
-find /usr/local/lib -path "*/tests" -type d -exec rm -rf {} + 2>/dev/null || true
-find /usr/local/lib -path "*/test" -type d -exec rm -rf {} + 2>/dev/null || true
-find /usr/local/lib -name "*.so.debug" -delete 2>/dev/null || true
-find /usr/local/lib -name "*.a" -delete 2>/dev/null || true
-
-# CatBoost specific cleanup - remove CUDA/GPU support files if present
-find /usr/local/lib -path "*/catboost/*" -name "*.cu" -delete 2>/dev/null || true
+# Remove test directories and docs
+find /usr/local/lib -type d -name "tests" -exec rm -rf {} + 2>/dev/null || true
+find /usr/local/lib -type d -name "test" -exec rm -rf {} + 2>/dev/null || true
+find /usr/local/lib -type d -name "docs" -exec rm -rf {} + 2>/dev/null || true
 
 echo "Build completed successfully"
