@@ -3,6 +3,10 @@ from src.pipelines.Prediction_Pipleline import CustomData, PredictPipeline
 
 app = Flask(__name__)
 
+@app.route('/favicon.ico')
+def favicon():
+    return '', 204
+
 @app.route("/", methods=['GET', 'POST'])
 def predict_datapoints():
     if request.method == 'GET':
